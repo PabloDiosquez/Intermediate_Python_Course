@@ -15,3 +15,11 @@ def turnOver(string: str) -> str:
     for index in range(len(string)-1,-1,-1):
         reverse += string[index]
     return reverse
+
+def isPrime(number: int) -> bool:
+    jumper = 2
+    while number % jumper and jumper <= number//2:
+        jumper +=1
+    if number > 1 and jumper > number//2:
+        return True
+    return False
