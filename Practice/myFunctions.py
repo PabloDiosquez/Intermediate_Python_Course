@@ -23,3 +23,13 @@ def isPrime(number: int) -> bool:
     if number > 1 and jumper > number//2:
         return True
     return False
+
+def passwordGenerator(size: int) -> str:
+    import secrets
+    import string
+    alphabet = string.ascii_letters + string.digits + string.punctuation
+    password = ''
+    for i in range(size):
+        password += ''.join(secrets.choice(alphabet)) # secrets.choice(sequence)
+                    # Return a randomly chosen element from a non-empty sequence.
+    return password
