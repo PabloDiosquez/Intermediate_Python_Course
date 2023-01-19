@@ -30,40 +30,45 @@ def digits(number: int) -> list:
     nList.reverse()
     return nList
 
-def compareNumber(number, userNumber):
-    result = {
+def compareNumber(secretNumber, userNumber):
+    cowbull = {
     'cows': 0,
     'bulls': 0
     }
-    nList = digits(number)
-    digitsList = digits(number)
-    for i in range(len(digitsList)):
-        if nList[i] == digitsList[i]:
-            result['cows'] += 1
-        else:
-            result['bulls'] += 1
-    cows = result.get('cows')
-    bulls = result.get('bulls')
-    return result
+    secretList = digits(secretNumber)
+    digitsList = digits(userNumber)
+    for i in range(len(secretList)):
+        if digitsList[i] == secretList[i]:
+            cowbull['bulls'] += 1
+        elif digitsList[i] in secretList:
+            cowbull['cows'] += 1
+    return cowbull
    
 
 def playGame():
+    playing = True
     print('''Welcome to the Cows 🐮 and Bulls ♉ Game!
     I will generate a number, and you have to guess the numbers one digit at a time.
     For every number in the wrong place, you get a cow. For every one in the right place, you get a bull.
     The game ends when you get 4 bulls!
+    Type "exit" at any prompt to exit.
     ''')
     secretNumber = random.randint(1000,9999)
     print(secretNumber)
     guesses = 0
-    while True:
-        userNumber = myFunctions.getInt('Give me your best guess!:')
-        result = compareNumber(secretNumber,userNumber)
+    while playing:
+        userInput = myFunctions.getString('Give me your best guess!:')
+        if userInput == 'exit': break
+        result = compareNumber(secretNumber,int(userInput))
         guesses += 1
+        cows = result.get('cows')
+        bulls = result.get('bulls')
+        print(f'Cows: {cows}, Bulls: {bulls}')
         if result['bulls'] == 4:
-            print(f'You win the game after {guesses} 🍾🎉. The number was {secretNumber} ')
-            break
+            print(f'You win the game after {guesses} guesses 🎉. The number was {secretNumber} ')
+            playing = False
         else:
             print('Your guess isn´t quite right, try again!') 
 
-playGame()
+if __name__ == '__main__':
+    playGame()
