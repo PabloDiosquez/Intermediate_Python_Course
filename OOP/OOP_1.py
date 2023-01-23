@@ -21,7 +21,7 @@ print(se1.name, se1.age)
 print(SoftwareEngineer.alias)
 print(se2.alias)
 
-# Recap
+# Recap:
 # create a class (blueprint)
 # create a instance (object)
 # class vs instance
